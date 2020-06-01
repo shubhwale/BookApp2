@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Book Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <span>Book Details</span>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="text-center">
+                            <img src = "{{ book.imageUrl | default: 'assets/images/cart.jpg'}}" width="40%" height="70%" 
+                            class="img-responsive"/>
+                            <br><br>
+                            <button type="button" class="btn" style="background-color: #ff9f00" (click)="addToCart(book)">Add To Cart</button>
+                            &nbsp;&nbsp;
+                            <button type="button" class="btn"  style="background-color: #fb641b">Buy Now</button>  
+                            <br><br>
+                               <button type="button" class="btn btn-primary" style="margin-right:30%"
+                                (click)="backPage()">Back</button>                          
+                            </div>
+                        <br><br>
+                        <!-- <div style="margin-left: 30%">
+                            <button (click) = "backPage()" type = "button" class="btn btn-primary">&lt; Back</button>
+                        </div> -->
+                    </div>
+                    <div class="col-md-6">
+                        
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>Book Id</td>
+                                <td>{{ book.bookId }}</td>
+                            </tr>
+                            <tr>
+                                <td>Title</td>
+                                <td>{{ book. title }}</td>
+                            </tr>
+                            <tr>
+                                    <td>Category</td>
+                                    <td>{{ book.category }}</td>
+                            </tr>
+                            <tr>
+                                <td>Publisher</td>
+                                <td>{{ book.publisher }}</td>
+                            </tr>
+                            <tr>
+                                <td>Authors</td>
+                                <td>
+                                    <span *ngFor = "let author of book.authors">
+                                           {{ author.firstName }} &nbsp; {{ author.lastName}} <br>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Pages</td>
+                                <td>{{ book.noOfPages }}</td>
+                            </tr>
+                            <tr>
+                                <td>Rating</td>
+                                <td>
+                                        <!-- <star-rating [rating] = "book.rating"></star-rating> --> {{ book.rating }}
+                                </td>
+                            </tr>                           
+                            <tr>
+                                <td>Edition</td>
+                                <td>{{ book.edition}}</td>
+                            </tr>
+                            <tr>
+                                <td>Price</td>
+                                <td>{{ book.price | currency: "INR"}}</td>
+                            </tr>
+                            <tr>
+                                    <td>Release Date</td>
+                                    <td>{{ book.releaseDate | date }}</td>
+                                </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

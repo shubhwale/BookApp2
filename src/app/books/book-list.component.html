@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <p style="background-color: black; color: white; font-size: 20px">Books</p>
+    </div>
+
+    <div class="container">
+        <table class="table table-bordered" *ngIf = "books && books.length">
+            <thead>
+                <tr>
+                    <th>Book Image</th>
+                    <th>Book Title</th>
+                    <th>Book Price</th>
+                    <th>Book Rating</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor = "let book of books">
+                    <td><a routerLink = "/book/{{ book.bookId }}"><img src = "{{ book.imageUrl }}" style="width: 70px; height: 90px"/></a></td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.price | currency: "INR"}}</td>
+                    <td>
+                        <star-rating [rating] = "book.rating"></star-rating>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-block" style="background-color: #ff9f00" (click)="addToCart(book)">Add To Cart</button>
+                        <button type="buton" class="btn btn-block" style="background-color: #fb641b">Buy Now</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>

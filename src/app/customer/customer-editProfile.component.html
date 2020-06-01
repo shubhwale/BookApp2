@@ -1,0 +1,67 @@
+<div class="container" style="width: 30%">
+    <div class="text-center">
+        <h3>Edit Profile</h3>
+    </div>
+    <form [formGroup]="customerForm" (ngSubmit)="editProfile()">
+        <div class="form-group">
+                <label class="form-label">Name: </label>
+                <input type="text" class="form-control" formControlName="name" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Email: </label>
+            <input type="email" class="form-control" formControlName="email" readonly/>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Contact: </label>
+            <input type="number" class="form-control" formControlName="contact" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Gender: </label>&nbsp;&nbsp;
+            <div class="form-check form-check-inline">
+                <input type="radio" formControlName="gender" value="Male"
+                 class="form-check-input" />Male                
+            </div>
+            <div class="form-check form-check-inline">
+                    <input type="radio" formControlName="gender" value="Female"
+                     class="form-check-input" />Female                
+            </div>
+
+            <div formGroupName="address">
+                <div class="form-group">
+                    <label class="form-label">Address Line 1: </label>
+                    <input type="text" class="form-control" formControlName="addressLine1" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">State: </label>
+                    <select class="custom-select" formControlName="state">
+                        <option value="">--select--</option>
+                        <option *ngFor="let state of states" value="{{ state }}">
+                              {{ state }}  
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                        <label class="form-label">City: </label>
+                        <select class="custom-select" formControlName="city">
+                            <option value="">--select--</option>
+                            <option *ngFor="let city of cities" value="{{ city }}">
+                                  {{ city }}  
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Postal Code: </label>
+                        <input type="number" class="form-control" formControlName="postalCode" />
+                    </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Update Profile</button>
+        </div>
+    </form>
+</div>

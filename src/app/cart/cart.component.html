@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="text-center" *ngIf="cart.items.length == 0">
+        <h5>Your cart is empty</h5>
+    </div>
+    <div class="text-center" *ngIf="cart.items.length > 0">
+       <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Image</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Amount</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of cart.items; let i = index">
+                    <td>
+                       <a routerLink = "/book/{{ item.book.bookId }}">  
+                        <img src = "{{ item.book.imageUrl}}" class="img-responsive" 
+                            style="width: 70px; height: 90px" />
+                        </a>
+                    </td>
+                    <td>{{ item.book.title }}</td>
+                    <td>{{ item.book.price | currency: "INR"}}</td>
+                    <td>
+                        <input type="number" min="1" max="5" [(ngModel)]="cart.items[i].quantity" 
+                         (change)="calculateTotal(true)"/>
+                    </td>
+                    <td>{{ item.book.price * item.quantity | currency: "INR" }}</td>
+                    <td>
+                        <button type="button" class="btn btn-block btn-primary"
+                        (click)="removeItemFromCart(i)">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Total Amount</td>
+                    <td>{{ cart.totalAmount | currency: "INR"}}</td>
+                    <td>
+                        <button type="button" class="btn btn-block btn-primary"
+                        (click)="placeOrders()">Checkout</button>
+                    </td>
+                </tr>
+            </tbody>
+       </table>
+    </div>
+</div>

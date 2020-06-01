@@ -1,0 +1,102 @@
+
+<div class="container" style="width: 40%">
+    <h4 class="text-center">
+        Customer Registration Form
+    </h4>
+
+    <!-- {{ customer | json }}
+    {{ customerForm.value | json }} -->
+    <!-- {{ customerForm.form.valid }} -->
+
+    <form #customerForm="ngForm" (ngSubmit)="registerNewCustomer()">
+        <div class="form-group">
+            <label class="form-label">Name: </label>
+            <input type="text" name="name" class="form-control" required #name="ngModel"
+              [(ngModel)]="customer.name" [class.is-invalid]="name.touched && name.invalid" />
+            <div class="text-danger" [class.d-none]="name.untouched || name.valid">
+                Name is required
+            </div>  
+         </div>
+
+         <div class="form-group">
+            <label class="form-label">Email Id: </label>
+            <input type="email" name="email" class="form-control" required 
+            [(ngModel)]="customer.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+            #email="ngModel"  [class.is-invalid]="email.touched && email.invalid" />
+            <div *ngIf="email.errors && (email.touched || email.invalid)">
+                <div class="text-danger" *ngIf="email.errors?.required" 
+                         [class.d-none]="email.untouched || email.valid">
+                         Email-Id is required
+                </div>
+                <div class="text-danger" *ngIf="email.errors?.pattern">
+                    Email-Id should be valid
+                </div>
+            </div>
+         </div>
+         
+         <div class="form-group">
+            <label class="form-label">Password: </label>
+            <input type="password" name="password" class="form-control" required 
+            [(ngModel)]="customer.password"/>
+         </div>
+
+         <div class="form-group">
+            <label class="form-label">Contact: </label>
+            <input type="number" name="contact" class="form-control" required 
+            [(ngModel)]="customer.contact" pattern="^\d{10}$"/>
+         </div>
+
+         <div class="form-group">
+             <label class="form-label">Gender: </label> &nbsp;&nbsp;
+             <div class="form-check form-check-inline">
+                <input type="radio" name="gender" value="Male" #gender="ngModel"
+                class="form-check-input" [(ngModel)]="customer.gender" required/>Male
+             </div>
+             <div class="form-check form-check-inline">
+                <input type="radio" name="gender" value="Female" #gender="ngModel" 
+                class="form-check-input" [(ngModel)]="customer.gender" required/>Female
+             </div>
+             <div class="text-danger" [class.d-none]="gender.untouched || gender.valid">
+                 Gender is required
+             </div>
+         </div>
+
+         <div class="form-group">
+             <label class="form-label">Address Line 1</label>
+             <input type="text" name="addressLine1" class="form-control" 
+             required [(ngModel)]="customer.address.addressLine1"/>
+         </div>
+
+         <div class="form-group">
+             <label class="form-label">State: </label>
+             <select class="form-control" name="state" required #state="ngModel"
+                 [(ngModel)]="customer.address.state"
+                [class.is-invalid]="state.touched && state.invalid" >
+                    <option value="">--select--</option>
+                    <option *ngFor = "let state of states" value="{{ state }}">{{ state }}</option>
+             </select>
+             <div class="text-danger" [class.d-none]="state.untouched || state.valid">
+                 State is required
+             </div>
+         </div>
+
+         <div class="form-group">
+            <label class="form-label">City: </label>
+            <select class="form-control" name="city" required
+              [(ngModel)]="customer.address.city">
+                   <option value="">--select--</option>
+                   <option *ngFor = "let city of cities" value="{{ city }}">{{ city }}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Postal Code: </label>
+            <input type="number" name="postalCode" class="form-control"
+              required [(ngModel)]="customer.address.postalCode" pattern="^\d{6}$"/> 
+        </div>
+
+        <button type="submit" class="btn btn-block btn-primary"
+          [disabled]="!customerForm.form.valid">Register</button>
+
+    </form>
+</div>
